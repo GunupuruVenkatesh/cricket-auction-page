@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Container 1</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1> Add players</h1>
+        <form id="userForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter Name" required><br><br>
+            <label for="money">Money:</label>
+            <input type="number" id="money" placeholder="Enter Money" required><br><br>
+            <button type="submit">Add to List</button>
+        </form>
+        
+        <h2>User List</h2>
+        <ul id="userList">
+            <!-- User list will appear here -->
+        </ul>
+
+        <button onclick="window.location.href='index.html'">Back to Containers</button>
+    </div>
+
+    <script src="scriptpl.js"></script>
+    <script>
+        const storageKey = 'container1Users';  // Unique storage key for container 1
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const users = loadFromLocalStorage(storageKey);
+            renderUserList(users, storageKey);
+        });
+
+        // Event listener for form submission
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const money = document.getElementById('money').value;
+            addUser(name, money, storageKey);
+            document.getElementById('name').value = '';
+            document.getElementById('money').value = '';
+        });
+    </script>
+</body>
+</html>
